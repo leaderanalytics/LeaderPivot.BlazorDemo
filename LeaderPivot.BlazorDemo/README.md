@@ -3,6 +3,15 @@
 
 LeaderPivot Blazor Demo
 
+1.) Control does not render unless Task.Delay is called in OnInitializedAsync.
+
+protected override async Task OnInitializedAsync()
+{
+    await Task.Delay(1);
+    await base.OnInitializedAsync();
+}
+
+2.) Measures property is set twice.
 
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
