@@ -1,13 +1,14 @@
 ﻿@page "/leaderpivotdemo"
 @using LeaderAnalytics.LeaderPivot
 @using LeaderAnalytics.LeaderPivot.TestData
-<h1>LeaderPivot Demo</h1>
 
-<div class="leader-pivot-test-fixture">
-    @*<LeaderPivot T="SalesData" @ref="pivot1" DataSource="@LoadSalesData" Dimensions="@SalesDataService.LoadDimensions()" Measures="@SalesDataService.LoadMeasures()" DisplayGrandTotals="true">*@
-    <LeaderPivot T="SalesData" @ref="pivot1" DataSource="@LoadSalesData" Measures="@SalesDataService.LoadMeasures()" Dimensions="@SalesDataService.LoadDimensions()"  DisplayGrandTotals="true">
-    </LeaderPivot>
-</div>
+
+    <h1>LeaderPivot Demo</h1>
+
+    <div id="demo-pivot-container">
+        <LeaderPivot T="SalesData" @ref="pivot1" DataSource="@LoadSalesData" Measures="@SalesDataService.LoadMeasures()" Dimensions="@SalesDataService.LoadDimensions()" DisplayGrandTotals="true">
+        </LeaderPivot>
+    </div>
 
 
 @code {

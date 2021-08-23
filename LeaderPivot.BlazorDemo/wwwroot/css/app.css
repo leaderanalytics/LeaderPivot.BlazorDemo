@@ -2,6 +2,16 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    display: flex;
+    flex: 1 1 auto;
+    height: 100vh;
+    width: 100vh;
+    max-height: 100vh;
+    max-width: 100vw;
+    min-height: 100vh;
+    min-width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 
 a, .btn-link {
@@ -14,9 +24,7 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
-.content {
-    padding-top: 1.1rem;
-}
+
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
@@ -28,6 +36,11 @@ a, .btn-link {
 
 .validation-message {
     color: red;
+}
+
+#app {
+    display:flex;
+    flex: 1;
 }
 
 #blazor-error-ui {

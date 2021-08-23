@@ -1,0 +1,14 @@
+﻿#demo-page {
+    flex-direction:column;
+}
+
+#demo-pivot-container {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    overflow: auto;
+    width: 83vw;
+    height: 80vh;
+    margin-right: 0vw;
+}
+
