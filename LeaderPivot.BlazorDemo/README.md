@@ -3,15 +3,9 @@
 
 LeaderPivot Blazor Demo
 
-1.) Control does not render unless Task.Delay is called in OnInitializedAsync.
+[How to constrain the size of a table in a flex layout](https://stackoverflow.com/questions/68884700/create-a-scrollable-container-for-a-table-without-fixed-size-that-also-prevents/68889342#68889342).
 
-protected override async Task OnInitializedAsync()
-{
-    await Task.Delay(1);
-    await base.OnInitializedAsync();
-}
 
-2.) Measures property is set twice.
 
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:

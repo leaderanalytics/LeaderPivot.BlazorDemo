@@ -1,14 +1,17 @@
 ﻿#demo-page {
-    flex-direction:column;
+    display:flex;
+    flex:1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
 }
 
 #demo-pivot-container {
     display: flex;
-    flex-grow: 1;
+    flex:1 1 auto;
     flex-direction: column;
     overflow: auto;
-    width: 83vw;
-    height: 80vh;
-    margin-right: 0vw;
+    min-height:0;
+    min-width:0;
 }
 

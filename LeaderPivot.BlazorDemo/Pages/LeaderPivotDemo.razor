@@ -2,15 +2,14 @@
 @using LeaderAnalytics.LeaderPivot
 @using LeaderAnalytics.LeaderPivot.TestData
 
-
+<div id="demo-page">
     <h1>LeaderPivot Demo</h1>
 
     <div id="demo-pivot-container">
         <LeaderPivot T="SalesData" @ref="pivot1" DataSource="@LoadSalesData" Measures="@SalesDataService.LoadMeasures()" Dimensions="@SalesDataService.LoadDimensions()" DisplayGrandTotals="true">
         </LeaderPivot>
     </div>
-
-
+</div>
 @code {
 
     private LeaderPivot<SalesData> pivot1;
