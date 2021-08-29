@@ -3,22 +3,68 @@
 @using LeaderAnalytics.LeaderPivot.TestData
 
 <div id="demo-page">
-    <h1>LeaderPivot Demo</h1>
 
+    <div style="display:flex;flex-direction:row;">
+        <h1>Sales Data</h1>
+        <div style="display:flex;align-items:center;margin-left:auto;margin-right:25px;">
+
+            <label class="col-form-label mr-2">Grand Totals Option:</label>
+            <input type="checkbox" class="form-check mr-2 mr-5" checked="@DisplayGrandTotalsOption"  @onchange="@(x => DisplayGrandTotalsOption = (bool)x.Value)" />
+
+            <label class="col-form-label mr-2">Dimension Buttons:</label>
+            <input type="checkbox" class="form-check mr-2 mr-5" checked="@DisplayDimensionButtons" @onchange="@(x => DisplayDimensionButtons = (bool)x.Value)" />
+
+            <label class="col-form-label mr-2">Measure Selectors:</label>
+            <input type="checkbox" class="form-check mr-2 mr-5" checked="@DisplayMeasureSelectors" @onchange="@(x => DisplayMeasureSelectors = (bool)x.Value)" />
+
+            <label class="col-form-label mr-2">Reload Data Button:</label>
+            <input type="checkbox" class="form-check mr-2 mr-5" checked="@DisplayReloadDataButton" @onchange="@(x => DisplayReloadDataButton = (bool)x.Value)" />
+
+            <label class="col-form-label mr-2">Theme:</label>
+            <select class="form-select form-select" style="width:15vw;min-width:100px;" @onchange="ChangeStyle">
+
+                @foreach (LeaderPivotStyle s in PivotStyles)
+                {
+                    <option value="@s.StyleName">@s.StyleName</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    @*https://stackoverflow.com/questions/68884700/create-a-scrollable-container-for-a-table-without-fixed-size-that-also-prevents*@
+    
     <div id="demo-pivot-container">
-        <LeaderPivot T="SalesData" @ref="pivot1" DataSource="@LoadSalesData" Measures="@SalesDataService.LoadMeasures()" Dimensions="@SalesDataService.LoadDimensions()" DisplayGrandTotals="true">
+        <LeaderPivot 
+            T="SalesData" 
+            @ref="pivot1" 
+            DataSource="@LoadSalesData" 
+            Measures="@SalesDataService.LoadMeasures()" 
+            Dimensions="@SalesDataService.LoadDimensions()" 
+            DisplayGrandTotals="true" 
+            DisplayGrandTotalOption="@DisplayGrandTotalsOption"
+            DisplayDimensionButtons="@DisplayDimensionButtons"
+            DisplayMeasureSelectors="@DisplayMeasureSelectors"
+            DisplayReloadDataButton="@DisplayReloadDataButton"
+            PivotStyle="@SelectedPivotStyle">
+
         </LeaderPivot>
     </div>
 </div>
 @code {
 
     private LeaderPivot<SalesData> pivot1;
+    private bool DisplayGrandTotalsOption = true;
+    private bool DisplayDimensionButtons = true;
+    private bool DisplayMeasureSelectors = true;
+    private bool DisplayReloadDataButton = false;
     private SalesDataService SalesDataService;
-
+    private List<LeaderPivotStyle> PivotStyles;
+    private LeaderPivotStyle SelectedPivotStyle;
 
     public LeaderPivotDemo()
     {
         SalesDataService = new SalesDataService();
+        CreateStyles();
     }
 
 
@@ -33,7 +79,6 @@
     private bool FilterFunc(SalesData state)
     {
         return true;
-
     }
 
     private PagedQueryResult<SalesData> LoadSalesData(PagedQueryArgs args)
@@ -41,4 +86,22 @@
         return new PagedQueryResult<SalesData> { Data = SalesDataService.GetSalesData() };
     }
 
+    private void CreateStyles()
+    {
+        PivotStyles = new List<LeaderPivotStyle>();
+        PivotStyles.Add(new LeaderPivotStyle()); // Default
+
+        LeaderPivotStyle dark = new LeaderPivotStyle
+        {
+            StyleName = "Dark",
+            Table = "table table-dark table-bordered"
+        };
+        PivotStyles.Add(dark);
+        SelectedPivotStyle = PivotStyles.First();
+    }
+
+    private void ChangeStyle(ChangeEventArgs e)
+    {
+        SelectedPivotStyle = PivotStyles.First(x => x.StyleName == e.Value.ToString());
+    }
 }
