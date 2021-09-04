@@ -33,13 +33,12 @@ main {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
     justify-content: flex-end;
-    height: 3.5rem;
+    height: 40px;
     display: flex;
-    flex:1 1 auto;
+    flex: 1 1 auto;
     align-items: center;
-    max-height:10vh;
-    min-height:40px;
-    min-width:0;
+    max-height: 40px;
+    min-width: 0;
 }
 
     .top-row ::deep a, .top-row .btn-link {

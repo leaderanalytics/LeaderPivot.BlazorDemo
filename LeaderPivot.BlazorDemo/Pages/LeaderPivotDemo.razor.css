@@ -1,4 +1,7 @@
-﻿#demo-page {
+﻿button {
+    max-height:40px;
+}
+#demo-page {
     display:flex;
     flex:1 1 auto;
     flex-direction: column;
