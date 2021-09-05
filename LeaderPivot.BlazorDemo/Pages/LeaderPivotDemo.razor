@@ -6,8 +6,8 @@
 
     <div style="display:flex;flex-direction:row;align-items:center;">
         <h1>Sales Data</h1>
-        <div class="flex-column @controlPanelStyle" style="margin-left: auto; margin-right: 25px; overflow-x: auto;">
-            <div style="display:flex;align-items:center;">
+        <div class="flex-column p-3 @controlPanelStyle" style="margin-left: auto; margin-right: 25px; overflow-x: auto;">
+            <div class="form-group" style="display:flex;align-items:center;">
 
                 <input type="checkbox" class="form-check mr-2" checked="@DisplayGrandTotalsOption" @onchange="@(x => DisplayGrandTotalsOption = (bool)x.Value)" />
                 <label class="col-form-label mr-5">Grand Totals Option</label>
@@ -22,7 +22,7 @@
                 <label class="col-form-label mr-5">Reload Data Button</label>
 
                 <label class="col-form-label mr-2">Theme:</label>
-                <select class="form-select form-select" style="width:15vw;min-width:100px;" @onchange="ChangeStyle">
+                <select class="form-control" style="width:15vw;min-width:100px;" @onchange="ChangeStyle">
 
                     @foreach (LeaderPivotStyle s in PivotStyles)
                     {
@@ -30,11 +30,11 @@
                     }
                 </select>
             </div>
-            <div style="display:flex;align-items:center;margin-left:auto;margin-right:25px;">
+            <div class="form-group" style="display:flex;align-items:center;margin-left:auto;margin-right:25px;">
                 <input type="checkbox" class="form-check mr-2 " checked="@SelectedPivotStyle.UseResponsiveSizing" @onchange="@(x => UseReponsiveSizingChanged((bool)x.Value))" />
                 <label class="col-form-label mr-5">Responsive Sizing</label>
 
-                <label class="col-form-label  mr-2">Font Size (@(SelectedPivotStyle.FontSize + (SelectedPivotStyle.UseResponsiveSizing ? "vw":"pt"))):</label>
+                <label class="col-form-label  mr-2">Font Size (@(SelectedPivotStyle.FontSize + (SelectedPivotStyle.UseResponsiveSizing ? "vw" : "pt"))):</label>
 
                 @if (SelectedPivotStyle.UseResponsiveSizing)
                 {
@@ -59,16 +59,25 @@
             </div>
         </div>
         <button class="btn btn-primary" style="margin-left:auto;margin-right:25px;" type="button" @onclick="@(x => ToggleControlPanelCollapse())">
-            Pivot table controls
+            @if (string.IsNullOrEmpty(controlPanelStyle))
+            {
+                <span class="oi oi-arrow-circle-top" title="Collapse Controls" aria-hidden="true"></span>
+            }
+            else
+            {
+                <span class="oi oi-arrow-circle-bottom" title="Expand Controls" aria-hidden="true"></span>
+            }
+
+
+        <lable class="ml-1">Controls</lable>
         </button>
 
     </div>
 
     @*https://stackoverflow.com/questions/68884700/create-a-scrollable-container-for-a-table-without-fixed-size-that-also-prevents*@
     
-    <div id="demo-pivot-container" style="background-color:yellow;">
-        <LeaderPivot 
-            T="SalesData" 
+    <div id="demo-pivot-container">
+        <LeaderPivot T="SalesData" 
             DataSource="@LoadSalesData" 
             Measures="@SalesDataService.LoadMeasures()" 
             Dimensions="@SalesDataService.LoadDimensions()" 
