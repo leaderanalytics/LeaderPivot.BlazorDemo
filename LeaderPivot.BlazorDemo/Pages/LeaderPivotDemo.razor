@@ -3,103 +3,46 @@
 @using LeaderAnalytics.LeaderPivot.TestData
 
 <div id="demo-page">
-
     <div style="display:flex;flex-direction:row;align-items:center;">
         <h1>Sales Data</h1>
-        <div class="flex-column p-3 @controlPanelStyle" style="margin-left: auto; margin-right: 25px; overflow-x: auto;">
-            <div class="form-group" style="display:flex;align-items:center;">
-
-                <input type="checkbox" class="form-check mr-2" checked="@DisplayGrandTotalsOption" @onchange="@(x => DisplayGrandTotalsOption = (bool)x.Value)" />
-                <label class="col-form-label mr-5">Grand Totals Option</label>
-
-                <input type="checkbox" class="form-check mr-2" checked="@DisplayDimensionButtons" @onchange="@(x => DisplayDimensionButtons = (bool)x.Value)" />
-                <label class="col-form-label mr-5">Dimension Buttons</label>
-
-                <input type="checkbox" class="form-check mr-2" checked="@DisplayMeasureSelectors" @onchange="@(x => DisplayMeasureSelectors = (bool)x.Value)" />
-                <label class="col-form-label mr-5">Measure Selectors</label>
-
-                <input type="checkbox" class="form-check mr-2 " checked="@DisplayReloadDataButton" @onchange="@(x => DisplayReloadDataButton = (bool)x.Value)" />
-                <label class="col-form-label mr-5">Reload Data Button</label>
-
-                <label class="col-form-label mr-2">Theme:</label>
-                <select class="form-control" style="width:15vw;min-width:100px;" @onchange="ChangeStyle">
-
-                    @foreach (LeaderPivotStyle s in PivotStyles)
-                    {
-                        <option value="@s.StyleName">@s.StyleName</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group" style="display:flex;align-items:center;margin-left:auto;margin-right:25px;">
-                <input type="checkbox" class="form-check mr-2 " checked="@SelectedPivotStyle.UseResponsiveSizing" @onchange="@(x => UseReponsiveSizingChanged((bool)x.Value))" />
-                <label class="col-form-label mr-5">Responsive Sizing</label>
-
-                <label class="col-form-label  mr-2">Font Size (@(SelectedPivotStyle.FontSize + (SelectedPivotStyle.UseResponsiveSizing ? "vw" : "pt"))):</label>
-
-                @if (SelectedPivotStyle.UseResponsiveSizing)
-                {
-                    <input type="range" class="form-control-range mr-5" min=".2" max="2" step=".01" @bind-value="@SelectedPivotStyle.FontSize" style="width:10vw;">
-                }
-                else
-                {
-                    <input type="range" class="form-control-range mr-5" min="6" max="20" @bind-value="@SelectedPivotStyle.FontSize" style="width:10vw;">
-                }
-
-
-                <label class="col-form-label mr-2">Cell Padding (@(SelectedPivotStyle.CellPadding + (SelectedPivotStyle.UseResponsiveSizing ? "vw" : "px"))):</label>
-
-                @if (SelectedPivotStyle.UseResponsiveSizing)
-                {
-                    <input type="range" class="form-control-range" min="0" max="2" step=".01" @bind-value="@SelectedPivotStyle.CellPadding" style="width:10vw;">
-                }
-                else
-                {
-                    <input type="range" class="form-control-range" min="0" max="10" @bind-value="@SelectedPivotStyle.CellPadding" style="width:10vw;">
-                }
-            </div>
+        <div class="flex-column p-3" style="margin-left: auto; margin-right: 25px; overflow-x: auto;">
+            <ControlPanel DisplayGrandTotalOption="@DisplayGrandTotalsOption"
+                          DisplayDimensionButtons="@DisplayDimensionButtons"
+                          DisplayMeasureSelectors="@DisplayMeasureSelectors"
+                          DisplayReloadDataButton="@DisplayReloadDataButton"
+                          PivotStyles="@PivotStyles"
+                          SelectedPivotStyle="@SelectedPivotStyle">
+            </ControlPanel>
         </div>
-        <button class="btn btn-primary" style="margin-left:auto;margin-right:25px;" type="button" @onclick="@(x => ToggleControlPanelCollapse())">
-            @if (string.IsNullOrEmpty(controlPanelStyle))
-            {
-                <span class="oi oi-arrow-circle-top" title="Collapse Controls" aria-hidden="true"></span>
-            }
-            else
-            {
-                <span class="oi oi-arrow-circle-bottom" title="Expand Controls" aria-hidden="true"></span>
-            }
-
-
-        <lable class="ml-1">Controls</lable>
-        </button>
-
     </div>
 
     @*https://stackoverflow.com/questions/68884700/create-a-scrollable-container-for-a-table-without-fixed-size-that-also-prevents*@
-    
-    <div id="demo-pivot-container">
-        <LeaderPivot T="SalesData" 
-            DataSource="@LoadSalesData" 
-            Measures="@SalesDataService.LoadMeasures()" 
-            Dimensions="@SalesDataService.LoadDimensions()" 
-            DisplayGrandTotals="true" 
-            DisplayGrandTotalOption="@DisplayGrandTotalsOption"
-            DisplayDimensionButtons="@DisplayDimensionButtons"
-            DisplayMeasureSelectors="@DisplayMeasureSelectors"
-            DisplayReloadDataButton="@DisplayReloadDataButton"
-            PivotStyle="@SelectedPivotStyle">
+
+    <div id="pivot-container">
+        <LeaderPivot T="SalesData"
+                     DataSource="@LoadSalesData"
+                     Measures="@SalesDataService.LoadMeasures()"
+                     Dimensions="@SalesDataService.LoadDimensions()"
+                     DisplayGrandTotals="true"
+                     DisplayGrandTotalOption="@DisplayGrandTotalsOption"
+                     DisplayDimensionButtons="@DisplayDimensionButtons"
+                     DisplayMeasureSelectors="@DisplayMeasureSelectors"
+                     DisplayReloadDataButton="@DisplayReloadDataButton"
+                     PivotStyle="@SelectedPivotStyle">
         </LeaderPivot>
     </div>
 </div>
+
 @code {
 
     private bool DisplayGrandTotalsOption = true;
     private bool DisplayDimensionButtons = true;
     private bool DisplayMeasureSelectors = true;
     private bool DisplayReloadDataButton = false;
-    private SalesDataService SalesDataService;
     private List<LeaderPivotStyle> PivotStyles;
     private LeaderPivotStyle SelectedPivotStyle;
     private string controlPanelStyle = "collapse";
+    private SalesDataService SalesDataService;
 
     public LeaderPivotDemo()
     {
@@ -123,30 +66,5 @@
     private PagedQueryResult<SalesData> LoadSalesData(PagedQueryArgs args)
     {
         return new PagedQueryResult<SalesData> { Data = SalesDataService.GetSalesData() };
-    }
-
-    private void ChangeStyle(ChangeEventArgs e)
-    {
-        SelectedPivotStyle = PivotStyles.First(x => x.StyleName == e.Value.ToString());
-    }
-
-    private void UseReponsiveSizingChanged(bool s)
-    {
-        SelectedPivotStyle.UseResponsiveSizing = s;
-
-        if (s)
-        {
-            SelectedPivotStyle.FontSize = ".6";
-            SelectedPivotStyle.CellPadding = ".5";
-        }
-        else
-        {
-            SelectedPivotStyle.FontSize = SelectedPivotStyle.CellPadding = null;
-        }
-    }
-
-    private void ToggleControlPanelCollapse()
-    {
-        controlPanelStyle = string.IsNullOrEmpty(controlPanelStyle) ? "collapse" : null;
     }
 }

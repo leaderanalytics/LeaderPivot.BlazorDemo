@@ -9,7 +9,7 @@
     min-width: 0;
 }
 
-#demo-pivot-container {
+#pivot-container {
     display: flex;
     flex:1 1 auto;
     flex-direction: column;
