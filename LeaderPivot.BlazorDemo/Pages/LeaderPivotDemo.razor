@@ -5,18 +5,17 @@
 <div id="demo-page">
     <div style="display:flex;flex-direction:row;align-items:center;">
         <h1>Sales Data</h1>
-        <div class="flex-column p-3" style="margin-left: auto; margin-right: 25px; overflow-x: auto;">
-            <ControlPanel DisplayGrandTotalOption="@DisplayGrandTotalsOption"
-                          DisplayDimensionButtons="@DisplayDimensionButtons"
-                          DisplayMeasureSelectors="@DisplayMeasureSelectors"
-                          DisplayReloadDataButton="@DisplayReloadDataButton"
-                          PivotStyles="@PivotStyles"
-                          SelectedPivotStyle="@SelectedPivotStyle">
+        <div class="d-flex flex-column p-3" style="margin-left: auto; margin-right:5px; overflow-x: auto;">
+            <ControlPanel @bind-DisplayGrandTotalOption="DisplayGrandTotalsOption"
+                          @bind-DisplayDimensionButtons="DisplayDimensionButtons"
+                          @bind-DisplayMeasureSelectors="DisplayMeasureSelectors"
+                          @bind-DisplayReloadDataButton="DisplayReloadDataButton"
+                          @bind-SelectedPivotStyle="SelectedPivotStyle">
             </ControlPanel>
         </div>
     </div>
 
-    @*https://stackoverflow.com/questions/68884700/create-a-scrollable-container-for-a-table-without-fixed-size-that-also-prevents*@
+    
 
     <div id="pivot-container">
         <LeaderPivot T="SalesData"
@@ -39,32 +38,14 @@
     private bool DisplayDimensionButtons = true;
     private bool DisplayMeasureSelectors = true;
     private bool DisplayReloadDataButton = false;
-    private List<LeaderPivotStyle> PivotStyles;
-    private LeaderPivotStyle SelectedPivotStyle;
+    private LeaderPivotStyle SelectedPivotStyle = new LeaderPivotStyle();
     private string controlPanelStyle = "collapse";
-    private SalesDataService SalesDataService;
+    private SalesDataService SalesDataService = new SalesDataService();
 
-    public LeaderPivotDemo()
+
+    private async Task<IEnumerable<SalesData>> LoadSalesData()
     {
-        SalesDataService = new SalesDataService();
-        PivotStyles = LeaderPivotStyles.Styles;
-        SelectedPivotStyle = PivotStyles.First();
-    }
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        await Task.Delay(1);
-        await base.OnInitializedAsync();
-    }
-
-    private bool FilterFunc(SalesData state)
-    {
-        return true;
-    }
-
-    private PagedQueryResult<SalesData> LoadSalesData(PagedQueryArgs args)
-    {
-        return new PagedQueryResult<SalesData> { Data = SalesDataService.GetSalesData() };
+        await Task.FromResult(0);
+        return SalesDataService.GetSalesData();
     }
 }

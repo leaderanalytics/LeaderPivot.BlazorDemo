@@ -1,75 +1,72 @@
-﻿<div class="@controlPanelStyle">
-    <div class="form-group" style="display:flex;align-items:center;">
+﻿<div class="d-flex" style="flex-direction:row">
+    <div style="display:@controlPanelStyle;flex-direction:column;">
+        <div class="form-group" style="display:flex;align-items:center;">
 
-        <input type="checkbox" class="form-check mr-2" checked="@DisplayGrandTotalOption" @onchange="@(x => DisplayGrandTotalOption = (bool)x.Value)" />
-        <label class="col-form-label mr-5">Grand Totals Option</label>
+            <input type="checkbox" class="form-check mr-2" checked="@DisplayGrandTotalOption" @onchange="(x => DisplayGrandTotalOptionChanged.InvokeAsync((bool)x.Value))" />
+            <label class="col-form-label mr-5">Grand Totals Option</label>
 
-        <input type="checkbox" class="form-check mr-2" checked="@DisplayDimensionButtons" @onchange="@(x => DisplayDimensionButtons = (bool)x.Value)" />
-        <label class="col-form-label mr-5">Dimension Buttons</label>
+            <input type="checkbox" class="form-check mr-2" checked="@DisplayDimensionButtons" @onchange="(x => DisplayDimensionButtonsChanged.InvokeAsync((bool)x.Value))" />
+            <label class="col-form-label mr-5">Dimension Buttons</label>
 
-        <input type="checkbox" class="form-check mr-2" checked="@DisplayMeasureSelectors" @onchange="@(x => DisplayMeasureSelectors = (bool)x.Value)" />
-        <label class="col-form-label mr-5">Measure Selectors</label>
+            <input type="checkbox" class="form-check mr-2" checked="@DisplayMeasureSelectors" @onchange="(x => DisplayMeasureSelectorsChanged.InvokeAsync((bool)x.Value))" />
+            <label class="col-form-label mr-5">Measure Selectors</label>
 
-        <input type="checkbox" class="form-check mr-2 " checked="@DisplayReloadDataButton" @onchange="@(x => DisplayReloadDataButton = (bool)x.Value)" />
-        <label class="col-form-label mr-5">Reload Data Button</label>
+            <input type="checkbox" class="form-check mr-2 " checked="@DisplayReloadDataButton" @onchange="(x => DisplayReloadDataButtonChanged.InvokeAsync((bool)x.Value))" />
+            <label class="col-form-label mr-5">Reload Data Button</label>
 
-        <label class="col-form-label mr-2">Theme:</label>
-        <select class="form-control" style="width:15vw;min-width:100px;" @onchange="ChangeStyle">
+            <label class="col-form-label mr-2">Theme:</label>
+            <select class="form-control" style="width:15vw;min-width:100px;" @onchange="ChangeStyle">
+                @foreach (LeaderPivotStyle s in PivotStyles)
+                {
+                    <option value="@s.StyleName">@s.StyleName</option>
+                }
+            </select>
+        </div>
 
-            @foreach (LeaderPivotStyle s in PivotStyles)
+        <div class="form-group" style="display: flex; align-items: center; margin-left: auto; margin-right: 25px;">
+            <input type="checkbox" class="form-check mr-2 " checked="@SelectedPivotStyle.UseResponsiveSizing" @onchange="(x => UseReponsiveSizingChanged((bool)x.Value))" />
+            <label class="col-form-label mr-5">Responsive Sizing</label>
+
+            <label class="col-form-label  mr-2">Font Size (@(SelectedPivotStyle.FontSize + (SelectedPivotStyle.UseResponsiveSizing ? "vw" : "pt"))):</label>
+
+            @if (SelectedPivotStyle.UseResponsiveSizing)
             {
-                <option value="@s.StyleName">@s.StyleName</option>
+                <input type="range" class="form-control-range mr-5" min=".2" max="2" step=".01" @bind-value="@SelectedPivotStyle.FontSize" style="width:10vw;">
             }
-        </select>
+            else
+            {
+                <input type="range" class="form-control-range mr-5" min="6" max="20" @bind="SelectedPivotStyle.FontSize" style="width:10vw;">
+            }
+
+
+            <label class="col-form-label mr-2">Cell Padding (@(SelectedPivotStyle.CellPadding + (SelectedPivotStyle.UseResponsiveSizing ? "vw" : "px"))):</label>
+
+            @if (SelectedPivotStyle.UseResponsiveSizing)
+            {
+                <input type="range" class="form-control-range" min="0" max="2" step=".01" @bind-value="@SelectedPivotStyle.CellPadding" style="width:10vw;">
+            }
+            else
+            {
+                <input type="range" class="form-control-range" min="0" max="10" @bind-value="@SelectedPivotStyle.CellPadding" style="width:10vw;">
+            }
+        </div>
     </div>
 
-    <div class="form-group" style="display:flex;align-items:center;margin-left:auto;margin-right:25px;">
-        <input type="checkbox" class="form-check mr-2 " checked="@SelectedPivotStyle.UseResponsiveSizing" @onchange="@(x => UseReponsiveSizingChanged((bool)x.Value))" />
-        <label class="col-form-label mr-5">Responsive Sizing</label>
-
-        <label class="col-form-label  mr-2">Font Size (@(SelectedPivotStyle.FontSize + (SelectedPivotStyle.UseResponsiveSizing ? "vw" : "pt"))):</label>
-
-        @if (SelectedPivotStyle.UseResponsiveSizing)
+    <button class="btn btn-primary" style="margin:0px 10px 0px 20px; height:40px;align-self:center;" type="button" @onclick="@(x => ToggleControlPanelCollapse())">
+        @if (controlPanelStyle == "flex")
         {
-            <input type="range" class="form-control-range mr-5" min=".2" max="2" step=".01" @bind-value="@SelectedPivotStyle.FontSize" style="width:10vw;">
+            <span class="oi oi-arrow-circle-top" title="Collapse Controls" aria-hidden="true"></span>
         }
         else
         {
-            <input type="range" class="form-control-range mr-5" min="6" max="20" @bind-value="@SelectedPivotStyle.FontSize" style="width:10vw;">
+            <span class="oi oi-arrow-circle-bottom" title="Expand Controls" aria-hidden="true"></span>
         }
-
-
-        <label class="col-form-label mr-2">Cell Padding (@(SelectedPivotStyle.CellPadding + (SelectedPivotStyle.UseResponsiveSizing ? "vw" : "px"))):</label>
-
-        @if (SelectedPivotStyle.UseResponsiveSizing)
-        {
-            <input type="range" class="form-control-range" min="0" max="2" step=".01" @bind-value="@SelectedPivotStyle.CellPadding" style="width:10vw;">
-        }
-        else
-        {
-            <input type="range" class="form-control-range" min="0" max="10" @bind-value="@SelectedPivotStyle.CellPadding" style="width:10vw;">
-        }
-    </div>
+        <lable class="ml-1">Controls</lable>
+    </button>
 </div>
-    
-<button class="btn btn-primary" style="margin-left:auto;margin-right:25px;" type="button" @onclick="@(x => ToggleControlPanelCollapse())">
-    @if (string.IsNullOrEmpty(controlPanelStyle))
-    {
-        <span class="oi oi-arrow-circle-top" title="Collapse Controls" aria-hidden="true"></span>
-    }
-    else
-    {
-        <span class="oi oi-arrow-circle-bottom" title="Expand Controls" aria-hidden="true"></span>
-    }
-
-
-    <lable class="ml-1">Controls</lable>
-</button>
-
 
 
 @code {
-
 
     [Parameter] public bool DisplayGrandTotalOption { get; set; }
     [Parameter] public bool DisplayDimensionButtons { get; set; }
@@ -77,21 +74,26 @@
     [Parameter] public bool DisplayReloadDataButton { get; set; }
     [Parameter] public LeaderPivotStyle SelectedPivotStyle { get; set; }
 
-    [Parameter] public List<LeaderPivotStyle> PivotStyles { get; set; }
 
-
-    [Parameter] public EventCallback<bool> DisplayGrandTotalsOptionChanged { get; set; }
+    [Parameter] public EventCallback<bool> DisplayGrandTotalOptionChanged { get; set; }
     [Parameter] public EventCallback<bool> DisplayDimensionButtonsChanged { get; set; }
     [Parameter] public EventCallback<bool> DisplayMeasureSelectorsChanged { get; set; }
     [Parameter] public EventCallback<bool> DisplayReloadDataButtonChanged { get; set; }
     [Parameter] public EventCallback<LeaderPivotStyle> SelectedPivotStyleChanged { get; set; }
 
-    private string controlPanelStyle = "collapse";
+    public List<LeaderPivotStyle> PivotStyles;
+    private string controlPanelStyle = "none";
 
+    public ControlPanel()
+    {
+        PivotStyles = LeaderPivotStyles.Styles;
+        SelectedPivotStyle = PivotStyles.First();
+    }
 
     private void ChangeStyle(ChangeEventArgs e)
     {
         SelectedPivotStyle = PivotStyles.First(x => x.StyleName == e.Value.ToString());
+        SelectedPivotStyleChanged.InvokeAsync(SelectedPivotStyle);
     }
 
     private void UseReponsiveSizingChanged(bool s)
@@ -104,15 +106,13 @@
             SelectedPivotStyle.CellPadding = ".5";
         }
         else
-        {
             SelectedPivotStyle.FontSize = SelectedPivotStyle.CellPadding = null;
-        }
 
-        SelectedPivotStyleChanged.InvokeAsync();
+        SelectedPivotStyleChanged.InvokeAsync(SelectedPivotStyle);
     }
 
     private void ToggleControlPanelCollapse()
     {
-        controlPanelStyle = string.IsNullOrEmpty(controlPanelStyle) ? "collapse" : null;
+        controlPanelStyle = controlPanelStyle == "none" ? "flex" : "none";
     }
 }

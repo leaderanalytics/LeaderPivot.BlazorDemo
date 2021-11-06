@@ -9,6 +9,8 @@
     min-width: 0;
 }
 
+/**https://stackoverflow.com/questions/68884700/create-a-scrollable-container-for-a-table-without-fixed-size-that-also-prevents**/
+
 #pivot-container {
     display: flex;
     flex:1 1 auto;
