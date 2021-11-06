@@ -3,9 +3,9 @@
 @using LeaderAnalytics.LeaderPivot.TestData
 
 <div id="demo-page">
-    <div style="display:flex;flex-direction:row;align-items:center;">
+    <div id="page-header">
         <h1>Sales Data</h1>
-        <div class="d-flex flex-column p-3" style="margin-left: auto; margin-right:5px; overflow-x: auto;">
+        <div id="control-panel-container" class="d-flex flex-column p-3" >
             <ControlPanel @bind-DisplayGrandTotalOption="DisplayGrandTotalsOption"
                           @bind-DisplayDimensionButtons="DisplayDimensionButtons"
                           @bind-DisplayMeasureSelectors="DisplayMeasureSelectors"

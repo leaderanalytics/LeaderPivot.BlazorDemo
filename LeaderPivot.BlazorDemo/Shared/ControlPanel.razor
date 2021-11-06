@@ -1,6 +1,6 @@
 ﻿<div class="d-flex" style="flex-direction:row">
     <div style="display:@controlPanelStyle;flex-direction:column;">
-        <div class="form-group" style="display:flex;align-items:center;">
+        <div class="form-group d-flex" style="align-items:center;">
 
             <input type="checkbox" class="form-check mr-2" checked="@DisplayGrandTotalOption" @onchange="(x => DisplayGrandTotalOptionChanged.InvokeAsync((bool)x.Value))" />
             <label class="col-form-label mr-5">Grand Totals Option</label>
@@ -15,7 +15,7 @@
             <label class="col-form-label mr-5">Reload Data Button</label>
 
             <label class="col-form-label mr-2">Theme:</label>
-            <select class="form-control" style="width:15vw;min-width:100px;" @onchange="ChangeStyle">
+            <select class="form-control" style="width:15vw;min-width:100px;" @onchange="OnPivotStyleChanged">
                 @foreach (LeaderPivotStyle s in PivotStyles)
                 {
                     <option value="@s.StyleName">@s.StyleName</option>
@@ -23,7 +23,7 @@
             </select>
         </div>
 
-        <div class="form-group" style="display: flex; align-items: center; margin-left: auto; margin-right: 25px;">
+        <div class="form-group d-flex" style="align-items:center; margin-left: auto; margin-right: 25px;">
             <input type="checkbox" class="form-check mr-2 " checked="@SelectedPivotStyle.UseResponsiveSizing" @onchange="(x => UseReponsiveSizingChanged((bool)x.Value))" />
             <label class="col-form-label mr-5">Responsive Sizing</label>
 
@@ -31,11 +31,11 @@
 
             @if (SelectedPivotStyle.UseResponsiveSizing)
             {
-                <input type="range" class="form-control-range mr-5" min=".2" max="2" step=".01" @bind-value="@SelectedPivotStyle.FontSize" style="width:10vw;">
+                <input type="range" class="form-control-range mr-5" min=".2" max="2" step=".01" style="width:10vw;" value="@SelectedPivotStyle.FontSize" @onchange="OnFontSizeChanged" >
             }
             else
             {
-                <input type="range" class="form-control-range mr-5" min="6" max="20" @bind="SelectedPivotStyle.FontSize" style="width:10vw;">
+                <input type="range" class="form-control-range mr-5" min="6" max="20" style="width:10vw;" value="@SelectedPivotStyle.FontSize" @onchange="OnFontSizeChanged" >
             }
 
 
@@ -43,11 +43,11 @@
 
             @if (SelectedPivotStyle.UseResponsiveSizing)
             {
-                <input type="range" class="form-control-range" min="0" max="2" step=".01" @bind-value="@SelectedPivotStyle.CellPadding" style="width:10vw;">
+                <input type="range" class="form-control-range" min="0" max="2" step=".01" style="width:10vw;" value="@SelectedPivotStyle.CellPadding" @onchange="OnCellPaddingChanged">
             }
             else
             {
-                <input type="range" class="form-control-range" min="0" max="10" @bind-value="@SelectedPivotStyle.CellPadding" style="width:10vw;">
+                <input type="range" class="form-control-range" min="0" max="10" style="width:10vw;" value="@SelectedPivotStyle.CellPadding" @onchange="OnCellPaddingChanged">
             }
         </div>
     </div>
@@ -90,12 +90,6 @@
         SelectedPivotStyle = PivotStyles.First();
     }
 
-    private void ChangeStyle(ChangeEventArgs e)
-    {
-        SelectedPivotStyle = PivotStyles.First(x => x.StyleName == e.Value.ToString());
-        SelectedPivotStyleChanged.InvokeAsync(SelectedPivotStyle);
-    }
-
     private void UseReponsiveSizingChanged(bool s)
     {
         SelectedPivotStyle.UseResponsiveSizing = s;
@@ -111,8 +105,23 @@
         SelectedPivotStyleChanged.InvokeAsync(SelectedPivotStyle);
     }
 
-    private void ToggleControlPanelCollapse()
+    private void OnPivotStyleChanged(ChangeEventArgs e)
     {
-        controlPanelStyle = controlPanelStyle == "none" ? "flex" : "none";
+        SelectedPivotStyle = PivotStyles.First(x => x.StyleName == e.Value.ToString());
+        SelectedPivotStyleChanged.InvokeAsync(SelectedPivotStyle);
     }
+
+    private void OnFontSizeChanged(ChangeEventArgs e)
+    {
+        SelectedPivotStyle.FontSize = e.Value.ToString();
+        SelectedPivotStyleChanged.InvokeAsync(SelectedPivotStyle);
+    }
+
+    private void OnCellPaddingChanged(ChangeEventArgs e)
+    {
+        SelectedPivotStyle.CellPadding = e.Value.ToString();
+        SelectedPivotStyleChanged.InvokeAsync(SelectedPivotStyle);
+    }
+
+    private void ToggleControlPanelCollapse() => controlPanelStyle = controlPanelStyle == "none" ? "flex" : "none";
 }
