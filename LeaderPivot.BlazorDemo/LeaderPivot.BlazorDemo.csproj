@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
 	  <ImplicitUsings>enable</ImplicitUsings>
-	  <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
 	  <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
 	  <GenerateAppxPackageOnBuild>enable</GenerateAppxPackageOnBuild>
   </PropertyGroup>
