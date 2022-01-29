@@ -5,6 +5,7 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
 	  <GenerateAppxPackageOnBuild>enable</GenerateAppxPackageOnBuild>
+	  <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
 	  <RunAOTCompilation>true</RunAOTCompilation>
   </PropertyGroup>
 
