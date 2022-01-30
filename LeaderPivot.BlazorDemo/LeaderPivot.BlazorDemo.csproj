@@ -6,6 +6,8 @@
 	  <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
 	  <GenerateAppxPackageOnBuild>enable</GenerateAppxPackageOnBuild>
 	  <RunAOTCompilation>true</RunAOTCompilation>
+	  <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+	  <UseBlazorWebAssembly>true</UseBlazorWebAssembly>
   </PropertyGroup>
 
   <ItemGroup>
