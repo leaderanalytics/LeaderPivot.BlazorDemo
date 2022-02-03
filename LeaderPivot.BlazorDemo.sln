@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaderPivot.BlazorDemo.Server", "LeaderPivot.BlazorDemo.Server\LeaderPivot.BlazorDemo.Server.csproj", "{4A13558E-EE75-4C0B-86E5-7E3788D57940}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EB613AE1-C773-400C-8A20-16966947912E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB613AE1-C773-400C-8A20-16966947912E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB613AE1-C773-400C-8A20-16966947912E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A13558E-EE75-4C0B-86E5-7E3788D57940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A13558E-EE75-4C0B-86E5-7E3788D57940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A13558E-EE75-4C0B-86E5-7E3788D57940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A13558E-EE75-4C0B-86E5-7E3788D57940}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
