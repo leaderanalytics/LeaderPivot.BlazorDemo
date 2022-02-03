@@ -23,9 +23,6 @@ steps:
     packageType: 'sdk'
     version: '6.x'
 
-- script: dotnet workload install wasm-tools
-  displayName: 'Install wasm-tools workload'
-
 - task: DotNetCoreCLI@2
   displayName: 'DotNet Restore NuGet packages'
   inputs:
