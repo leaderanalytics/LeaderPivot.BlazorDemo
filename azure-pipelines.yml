@@ -38,7 +38,7 @@ steps:
   displayName: 'Dotnet publish'
   inputs:
     command: publish
-    publishWebProjects: True
+    publishWebProjects: false
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory) --self-contained'
     zipAfterPublish: True
 
