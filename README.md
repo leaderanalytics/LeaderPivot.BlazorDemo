@@ -2,6 +2,9 @@
 
 # Blazor Demo Application for LeaderPivot
 
+
+## [Live Demo](https://leaderanalytics.com/blazor/leaderpivotdemo)
+
 LeaderPivot.Blazor is an easy to use pivot table control for Blazor applications.  
 
 This demo application showcases some of the features of LeaderPivot.Blazor.  It also provides a copy/paste template you can use to implement the control in your app.  Look at the [LeaderPivot.TestData repository](https://github.com/leaderanalytics/LeaderPivot.TestData) for examples of how to create `Measures` and `Dimensions`.  
