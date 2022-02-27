@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly" InitialTargets="CopyIndex">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,9 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LeaderAnalytics.LeaderPivot.Blazor" Version="1.0.21-beta.2" />
-    <PackageReference Include="LeaderAnalytics.LeaderPivot.TestData" Version="1.0.8-beta.2" />
+    <PackageReference Include="LeaderAnalytics.LeaderPivot.Blazor" Version="1.0.23-beta.2" />
+    <PackageReference Include="LeaderAnalytics.LeaderPivot.TestData" Version="1.0.10-beta.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
   </ItemGroup>
+
+	<Target Name="CopyIndex">
+		<Copy Condition=" '$(Configuration)' != 'Release'" SourceFiles="$(ProjectDir)wwwroot\index.development.html" DestinationFiles="$(ProjectDir)wwwroot\index.html" />
+		<Copy Condition=" '$(Configuration)' == 'Release'" SourceFiles="$(ProjectDir)wwwroot\index.production.html" DestinationFiles="$(ProjectDir)wwwroot\index.html" />
+	</Target>
 </Project>

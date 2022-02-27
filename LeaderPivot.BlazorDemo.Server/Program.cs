@@ -1,3 +1,11 @@
+/* 
+ * When running locally change
+ * <base href="/blazor/" />
+ * to
+ * <base href="/" />
+ * in wwwroot/index.html in client project
+ * 
+ */
 using Microsoft.AspNetCore.ResponseCompression;
 using Serilog;
 
