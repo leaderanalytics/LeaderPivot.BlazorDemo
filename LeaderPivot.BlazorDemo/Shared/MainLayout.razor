@@ -1,12 +1,12 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager NavManager
+@using System.Reflection;
 
 <div id="main-layout-page">
     <NavMenu />
 
     <div class="col-layout">
-        <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+        <div class="top-row px-4">@leaderPivotVersion
         </div>
 
         <main>
@@ -16,8 +16,11 @@
 </div>
 
 @code {
+    private string leaderPivotVersion;
+
     protected override void OnInitialized()
     {
+        leaderPivotVersion = "LeaderPivot.Blazor v" + System.Reflection.Assembly.GetAssembly(typeof(LeaderAnalytics.LeaderPivot.Blazor.MeasureCell)).GetName().Version.ToString();
         NavManager.NavigateTo("leader-pivot-demo");
     }
 }

@@ -5,7 +5,9 @@
 
 
 trigger:
-- release/*
+  tags:
+      include:
+        - release/*  
 
 pool:
   vmImage: 'windows-latest'
@@ -16,12 +18,30 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+# nbgv need a deep clone
+
+- checkout: self
+  fetchDepth: 0
+
+# install nbgv tooling
+
+- task: DotNetCoreCLI@2  
+  displayName: Install NBGV tool
+  inputs:
+    command: custom
+    custom: tool
+    arguments: install --tool-path . nbgv
+
+# allow nbgv to set the version
+
+- script: nbgv cloud
+  displayName: Set Version
 
 - task: UseDotNet@2
-  displayName: 'Use dotnet 6'
+  displayName: 'Use dotnet 7'
   inputs:
     packageType: 'sdk'
-    version: '6.x'
+    version: '7.x'
 
 - task: DotNetCoreCLI@2
   displayName: 'DotNet Restore NuGet packages'
