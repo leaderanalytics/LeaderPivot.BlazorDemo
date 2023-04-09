@@ -47,14 +47,23 @@ if (startupEx != null)
 
 try
 {
+    bool serverSideBlazor = true;
     Log.Information("Program LeaderPivot.BlazorDemo.Server started");
     Log.Information("Environment is: {env}", environmentName);
     Log.Information("Log files will be written to {logRoot}", logFolder);
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
-    builder.Services.AddControllersWithViews();
     builder.Services.AddRazorPages();
+    
+    if (serverSideBlazor)
+    {
+        builder.Services.AddServerSideBlazor();     // Server
+    }
+    else
+    {
+        builder.Services.AddControllersWithViews(); // WASM
+    }
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -67,9 +76,19 @@ try
     app.UseBlazorFrameworkFiles();
     app.UseStaticFiles();
     app.UseRouting();
-    app.MapRazorPages();
-    app.MapControllers();
-    app.MapFallbackToFile("index.html");
+
+    if (serverSideBlazor)
+    {
+        app.MapBlazorHub();                     // Server
+        app.MapFallbackToPage("/_Host");        // Server
+    }
+    else
+    {
+        app.MapRazorPages();                    // WASM
+        app.MapControllers();                   // WASM
+        app.MapFallbackToFile("index.html");    // WASM
+    }
+
     app.Run();
 }
 catch (Exception ex)
