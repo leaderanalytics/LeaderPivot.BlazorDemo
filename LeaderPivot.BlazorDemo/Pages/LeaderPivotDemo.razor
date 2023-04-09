@@ -10,6 +10,7 @@
                           @bind-DisplayDimensionButtons="DisplayDimensionButtons"
                           @bind-DisplayMeasureSelectors="DisplayMeasureSelectors"
                           @bind-DisplayReloadDataButton="DisplayReloadDataButton"
+                          @bind-DisplayHiddenDimSelector="DisplayHiddenDimSelector"
                           @bind-SelectedPivotStyle="SelectedPivotStyle">
             </ControlPanel>
         </div>
@@ -27,6 +28,7 @@
                      DisplayDimensionButtons="@DisplayDimensionButtons"
                      DisplayMeasureSelectors="@DisplayMeasureSelectors"
                      DisplayReloadDataButton="@DisplayReloadDataButton"
+                     DisplayHiddenDimSelector="@DisplayHiddenDimSelector"
                      PivotStyle="@SelectedPivotStyle">
         </LeaderPivot>
     </div>
@@ -38,6 +40,7 @@
     private bool DisplayDimensionButtons = true;
     private bool DisplayMeasureSelectors = true;
     private bool DisplayReloadDataButton = false;
+    private bool DisplayHiddenDimSelector = true;
     private LeaderPivotStyle SelectedPivotStyle = new LeaderPivotStyle();
     private string controlPanelStyle = "collapse";
     private SalesDataService SalesDataService = new SalesDataService();
