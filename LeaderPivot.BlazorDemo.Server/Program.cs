@@ -47,7 +47,7 @@ if (startupEx != null)
 
 try
 {
-    bool serverSideBlazor = true;
+    bool serverSideBlazor = false;
     Log.Information("Program LeaderPivot.BlazorDemo.Server started");
     Log.Information("Environment is: {env}", environmentName);
     Log.Information("Log files will be written to {logRoot}", logFolder);
