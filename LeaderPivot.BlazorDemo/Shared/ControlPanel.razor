@@ -14,6 +14,9 @@
             <input type="checkbox" class="form-check mr-2 " checked="@DisplayReloadDataButton" @onchange="(x => DisplayReloadDataButtonChanged.InvokeAsync((bool)x.Value))" />
             <label class="col-form-label mr-5">Reload Data Button</label>
 
+            <input type="checkbox" class="form-check mr-2 " checked="@DisplayHiddenDimSelector" @onchange="(x => DisplayHiddenDimSelectorChanged.InvokeAsync((bool)x.Value))" />
+            <label class="col-form-label mr-5">Hidden Dimension Selector</label>
+
             <label class="col-form-label mr-2">Theme:</label>
             <select class="form-control" style="width:15vw;min-width:100px;" @onchange="OnPivotStyleChanged">
                 @foreach (LeaderPivotStyle s in PivotStyles)
@@ -72,6 +75,7 @@
     [Parameter] public bool DisplayDimensionButtons { get; set; }
     [Parameter] public bool DisplayMeasureSelectors { get; set; }
     [Parameter] public bool DisplayReloadDataButton { get; set; }
+    [Parameter] public bool DisplayHiddenDimSelector { get; set; }
     [Parameter] public LeaderPivotStyle SelectedPivotStyle { get; set; }
 
 
@@ -79,6 +83,7 @@
     [Parameter] public EventCallback<bool> DisplayDimensionButtonsChanged { get; set; }
     [Parameter] public EventCallback<bool> DisplayMeasureSelectorsChanged { get; set; }
     [Parameter] public EventCallback<bool> DisplayReloadDataButtonChanged { get; set; }
+    [Parameter] public EventCallback<bool> DisplayHiddenDimSelectorChanged { get; set; }
     [Parameter] public EventCallback<LeaderPivotStyle> SelectedPivotStyleChanged { get; set; }
 
     public List<LeaderPivotStyle> PivotStyles;
