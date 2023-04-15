@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LeaderAnalytics.LeaderPivot.Blazor" Version="2.2.3" />
-    <PackageReference Include="LeaderAnalytics.LeaderPivot.TestData" Version="1.0.10-beta.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.4" PrivateAssets="all" />
+    <PackageReference Include="LeaderAnalytics.LeaderPivot.Blazor" Version="2.2.4" />
+    <PackageReference Include="LeaderAnalytics.LeaderPivot.TestData" Version="1.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.5" PrivateAssets="all" />
   </ItemGroup>
 
 	<Target Name="CopyIndex">
