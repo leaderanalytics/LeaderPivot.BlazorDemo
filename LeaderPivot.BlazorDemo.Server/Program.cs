@@ -8,7 +8,6 @@
  */
 using Microsoft.AspNetCore.ResponseCompression;
 using Serilog;
-
 string environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "production";
 string logFolder = "."; // fallback location if we cannot read config
 Exception? startupEx = null;
