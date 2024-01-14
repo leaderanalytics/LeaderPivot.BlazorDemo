@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
@@ -12,13 +12,18 @@
     <_ContentIncludedByDefault Remove="appsettings.production.json" />
   </ItemGroup>
 
+    	
   <ItemGroup>
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.5" />
-	  <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+    <None Include="Components\App.razor" />
+    <None Include="Components\Pages\Error.razor" />
+    <None Include="Components\_Imports.razor" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LeaderPivot.BlazorDemo\LeaderPivot.BlazorDemo.csproj" />
+	  <PackageReference Include="LeaderAnalytics.LeaderPivot.Blazor" Version="3.0.0" />
+	  <PackageReference Include="LeaderAnalytics.LeaderPivot.TestData" Version="1.2.5" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
+	  <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +40,10 @@
     <Content Update="appsettings.production.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Nerdbank.GitVersioning" Version="3.6.133" />
   </ItemGroup>
 
 </Project>
