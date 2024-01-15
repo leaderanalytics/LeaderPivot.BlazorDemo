@@ -14,7 +14,7 @@
 
 
   <ItemGroup>
-	  <PackageReference Include="LeaderAnalytics.LeaderPivot.Blazor" Version="3.0.0" />
+	  <PackageReference Include="LeaderAnalytics.LeaderPivot.Blazor" Version="3.0.1" />
 	  <PackageReference Include="LeaderAnalytics.LeaderPivot.TestData" Version="1.2.5" />
 	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
 	  <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
