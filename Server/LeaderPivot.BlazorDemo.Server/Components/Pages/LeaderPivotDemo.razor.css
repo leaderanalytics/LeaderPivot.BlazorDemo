@@ -1,0 +1,36 @@
+﻿button {
+    max-height:40px;
+}
+#demo-page {
+    display:flex;
+    flex:1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+}
+
+#page-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#control-panel-container {
+    margin-left: auto;
+    margin-right: 5px;
+    overflow-x: auto;
+}
+
+
+
+/**https://stackoverflow.com/questions/68884700/create-a-scrollable-container-for-a-table-without-fixed-size-that-also-prevents**/
+
+#pivot-container {
+    display: flex;
+    flex:1 1 auto;
+    flex-direction: column;
+    overflow: auto;
+    min-height:0;
+    min-width:0;
+}
+

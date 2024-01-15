@@ -1,0 +1,22 @@
+﻿@page "/"
+@inject NavigationManager NavManager
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+<button @onclick="go">Demo</button>
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        NavManager.NavigateTo("/leader-pivot-demo");
+    }
+
+
+    protected async Task go()
+    {
+        NavManager.NavigateTo("leader-pivot-demo");
+    }
+}

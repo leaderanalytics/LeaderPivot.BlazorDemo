@@ -12,12 +12,6 @@
     <_ContentIncludedByDefault Remove="appsettings.production.json" />
   </ItemGroup>
 
-    	
-  <ItemGroup>
-    <None Include="Components\App.razor" />
-    <None Include="Components\Pages\Error.razor" />
-    <None Include="Components\_Imports.razor" />
-  </ItemGroup>
 
   <ItemGroup>
 	  <PackageReference Include="LeaderAnalytics.LeaderPivot.Blazor" Version="3.0.0" />
