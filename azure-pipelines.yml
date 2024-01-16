@@ -51,6 +51,7 @@ steps:
     feedsToUse: 'select'
     vstsFeed: 'LeaderAnalyticsFeed'
     includeNuGetOrg: true
+    projects: $(serverProject) $(wasmProject)
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
