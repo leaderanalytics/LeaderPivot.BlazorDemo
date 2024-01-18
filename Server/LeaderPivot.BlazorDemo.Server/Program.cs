@@ -17,6 +17,7 @@ public class Program
     public static async Task Main(string[] args)
     {
         string environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "production";
+        AppConfig environmentConfig = new AppConfig(environmentName);
         string logFolder = "."; // fallback location if we cannot read config
         Exception? startupEx = null;
         IConfigurationRoot? appConfig = null;
@@ -59,8 +60,8 @@ public class Program
             Log.Information("Environment is: {env}", environmentName);
             Log.Information("Log files will be written to {logRoot}", logFolder);
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddSingleton(environmentConfig); // Used in App.razor
             builder.Services.AddLeaderPivot();
-            // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents()
