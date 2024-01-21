@@ -19,15 +19,15 @@
 
     <div id="pivot-container">
         <LeaderPivot T="SalesData"
-                     DataSource="@LoadSalesData"
-                     Measures="@SalesDataService.LoadMeasures()"
-                     Dimensions="@SalesDataService.LoadDimensions()"
+                     DataSource="LoadSalesData"
+                     Measures="Measures"
+                     Dimensions="Dimensions"
                      DisplayGrandTotals="true"
-                     DisplayGrandTotalOption="@DisplayGrandTotalsOption"
-                     DisplayDimensionButtons="@DisplayDimensionButtons"
-                     DisplayMeasureSelectors="@DisplayMeasureSelectors"
-                     DisplayReloadDataButton="@DisplayReloadDataButton"
-                     DisplayHiddenDimSelector="@DisplayHiddenDimSelector"
+                     DisplayGrandTotalOption="DisplayGrandTotalsOption"
+                     DisplayDimensionButtons="DisplayDimensionButtons"
+                     DisplayMeasureSelectors="DisplayMeasureSelectors"
+                     DisplayReloadDataButton="DisplayReloadDataButton"
+                     DisplayHiddenDimSelector="DisplayHiddenDimSelector"
                      PivotStyle="@SelectedPivotStyle">
         </LeaderPivot>
     </div>
@@ -43,6 +43,15 @@
     private LeaderPivotStyle SelectedPivotStyle = new LeaderPivotStyle();
     private string controlPanelStyle = "collapse";
     private SalesDataService SalesDataService = new SalesDataService();
+    private List<Measure<SalesData>> Measures;
+    private List<Dimension<SalesData>> Dimensions;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        Measures = SalesDataService.LoadMeasures();
+        Dimensions = SalesDataService.LoadDimensions();
+    }
 
 
     private async Task<IEnumerable<SalesData>> LoadSalesData()
