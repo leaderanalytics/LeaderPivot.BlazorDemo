@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Serilog;
 using LeaderPivot.BlazorDemo.Server.Components;
 using LeaderAnalytics.LeaderPivot.Blazor;
+using MudBlazor.Services;
+using LeaderAnalytics.MessageBox.Blazor;
 namespace LeaderPivot.BlazorDemo.Server;
 
 public class Program
@@ -66,7 +68,8 @@ public class Program
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents()
                 .AddInteractiveWebAssemblyComponents();
-
+            builder.Services.AddMudServices();
+            builder.Services.AddMessageBoxBlazor();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

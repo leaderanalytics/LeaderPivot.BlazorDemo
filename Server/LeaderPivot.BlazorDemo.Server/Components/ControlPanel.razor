@@ -126,6 +126,7 @@
     {
         SelectedPivotStyle.CellPadding = e.Value.ToString();
         SelectedPivotStyleChanged.InvokeAsync(SelectedPivotStyle);
+
     }
 
     private void ToggleControlPanelCollapse() => controlPanelStyle = controlPanelStyle == "none" ? "flex" : "none";

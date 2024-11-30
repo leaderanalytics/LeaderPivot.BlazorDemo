@@ -27,13 +27,14 @@
                      DisplayMeasureSelectors="DisplayMeasureSelectors"
                      DisplayReloadDataButton="DisplayReloadDataButton"
                      DisplayHiddenDimSelector="DisplayHiddenDimSelector"
-                     PivotStyle="SelectedPivotStyle">
+                     PivotStyle="SelectedPivotStyle"
+                     IsBusyChanged="IsBusyChanged">
         </LeaderPivot>
     </div>
 </div>
 
 @code {
-
+    [Inject] public IMessageBox MessageBox { get; set; }
     private bool DisplayGrandTotalsOption = true;
     private bool DisplayDimensionButtons = true;
     private bool DisplayMeasureSelectors = true;
@@ -44,6 +45,12 @@
     private SalesDataService SalesDataService = new SalesDataService();
     private List<Measure<SalesData>> Measures;
     private List<Dimension<SalesData>> Dimensions;
+    private bool _IsBusy;
+    public bool IsBusy
+    {
+        get => _IsBusy;
+        set => _IsBusy = value;
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,5 +62,13 @@
     private async Task<IEnumerable<SalesData>> LoadSalesData()
     {
         return SalesDataService.GetSalesData();
+    }
+
+    private async Task IsBusyChanged(bool busy)
+    {
+        if (busy)
+             await MessageBox.ShowLoading();
+        else
+             await MessageBox.HideLoading();
     }
 }

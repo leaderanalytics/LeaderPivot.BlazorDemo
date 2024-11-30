@@ -1,13 +1,15 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager NavManager
 @using System.Reflection;
-
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MessageBoxProvider />
 <div id="main-layout-page">
     <NavMenu />
 
     <div class="col-layout">
-        <div class="top-row px-4">@leaderPivotVersion
-        </div>
+        <div class="top-row px-4">@leaderPivotVersion</div>
 
         <main>
             @Body
@@ -21,6 +23,5 @@
     protected override void OnInitialized()
     {
         leaderPivotVersion = "LeaderPivot.Blazor v" + System.Reflection.Assembly.GetAssembly(typeof(LeaderAnalytics.LeaderPivot.Blazor.LeaderPivotStyle)).GetName().Version.ToString();
-        //NavManager.NavigateTo("/leader-pivot-demo");
     }
 }
