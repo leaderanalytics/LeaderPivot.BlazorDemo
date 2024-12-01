@@ -67,7 +67,8 @@ public class Program
             builder.Services.AddRazorPages();
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents()
-                .AddInteractiveWebAssemblyComponents();
+                .AddInteractiveWebAssemblyComponents()
+                .AddAuthenticationStateSerialization();
             builder.Services.AddMudServices();
             builder.Services.AddMessageBoxBlazor();
             var app = builder.Build();
@@ -86,7 +87,7 @@ public class Program
 
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.MapStaticAssets();
             app.UseAntiforgery();
 
             app.MapRazorComponents<App>()

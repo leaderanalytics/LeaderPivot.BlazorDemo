@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaderPivot.BlazorDemo.Server", "LeaderPivot.BlazorDemo.Server\LeaderPivot.BlazorDemo.Server.csproj", "{4A13558E-EE75-4C0B-86E5-7E3788D57940}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaderPivot.Blazor", "..\..\LeaderPivot.Blazor\LeaderPivot.Blazor\LeaderPivot.Blazor.csproj", "{24BB910D-3EF0-4625-848D-825B100C6415}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,10 +22,6 @@ Global
 		{4A13558E-EE75-4C0B-86E5-7E3788D57940}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A13558E-EE75-4C0B-86E5-7E3788D57940}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A13558E-EE75-4C0B-86E5-7E3788D57940}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24BB910D-3EF0-4625-848D-825B100C6415}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24BB910D-3EF0-4625-848D-825B100C6415}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24BB910D-3EF0-4625-848D-825B100C6415}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24BB910D-3EF0-4625-848D-825B100C6415}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

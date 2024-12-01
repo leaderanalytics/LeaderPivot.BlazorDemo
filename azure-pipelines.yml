@@ -37,22 +37,7 @@ steps:
 
 - script: nbgv cloud
   displayName: Set Version
-
-- task: UseDotNet@2
-  displayName: 'Use dotnet 8'
-  inputs:
-    packageType: 'sdk'
-    version: '8.x'
-
-- task: DotNetCoreCLI@2
-  displayName: 'DotNet Restore NuGet packages'
-  inputs:
-    command: 'restore'
-    feedsToUse: 'select'
-    vstsFeed: 'LeaderAnalyticsFeed'
-    includeNuGetOrg: true
-    projects: '**/*.csproj'
-
+  
 - script: dotnet build $(serverProject) --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
